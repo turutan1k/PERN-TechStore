@@ -1,64 +1,51 @@
-// import React from 'react';
-// import { NavLink, useLocation} from 'react-router-dom';
-// import { LOGIN_ROUTE, REGISTRATION_ROUTE } from './../utils/consts';
-// import {Formik, Form, ErrorMessage, Field} from 'formik';
-
-// const Auth = () => {
-//     const location = useLocation() //Маршрут в строке запроса (ХУК)
-//     const isLogin = location.pathname===LOGIN_ROUTE
-
-//     return (
-//         <Container
-//             style={{height: window.innerHeight - 54}}
-//         >
-//             <Form className="formContainer"style={{width: 600}}>
-//                 <h2 className="m-auto">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
-//                 <Form className="d-flex flex-column">
-//                     <Form.Control
-//                         className="mt-3"
-//                         placeholder="Введите ваш email..."
-//                     />
-//                     <Form.Control
-//                         className="mt-3"
-//                         placeholder="Введите ваш пароль..."
-//                     />
-//                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-//                     <Button className="align-self-end"
-//                             variant={"outline-success"}
-//                         >
-//                         {isLogin ? 'Войти' : 'Регистрация'}
-//                     </Button>
-//                             {isLogin ? 
-//                             <div className="mt-3">
-//                                 Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Регистрация</NavLink>
-//                             </div>
-//                             :
-//                             <div className="mt-3">
-//                                 Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войти!</NavLink>
-//                             </div>
-//                             }
-//                     </Row>
-
-//                 </Form>
-//             </Form>
-//         </Container>
-//     );
-// };
-
-// export default Auth;
 import React from 'react';
+import { TextField, DialogActions, Dialog, DialogContentText, DialogContent, DialogTitle, Button  } from '@mui/material';
+import { LOGIN_ROUTE } from '../utils/consts';
+import { REGISTRATION_ROUTE } from '../utils/consts';
+import { useLocation } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 const Auth = () => {
-    return (
-        <div className="auth">
-            <form>
-                <h1>Регистрация</h1>
-                <input name="email" type="text" placeholder="Введите ваш email....."/>
-                <input name="email" type="password" placeholder="Введите ваш пароль....."/>
-                <button type="submit">Зарегестрироваться</button>
-            </form>
-        </div>
-    );
+  const [open, setOpen] = React.useState(false);
+  const location = useLocation()
+  const isLogin = location.pathname === LOGIN_ROUTE
+
+  const handleClose = () =>{
+    setOpen(false);
+  }
+
+  return (
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <DialogTitle id="form-dialog-title">{isLogin ? 'Авторизация' : "Регистрация"}</DialogTitle>
+        <DialogContent>
+          {isLogin ? 
+            <DialogContentText>Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Регистрация</NavLink></DialogContentText>
+            :
+            <DialogContentText>Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Вход</NavLink></DialogContentText>
+          }
+              <TextField 
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Email Adress"
+                type="email"
+                fullWidth
+              />
+              <TextField 
+                autoFocus
+                margin="dense"
+                id="pass"
+                label="Password"
+                type="password"
+                fullWidth
+              />
+          </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">Отмена</Button>
+        {isLogin ? <Button onClick={handleClose} color="primary">Войти</Button> : <Button onClick={handleClose} color="primary">Регистрация</Button>}
+      </DialogActions>
+    </Dialog>
+  );
 };
 
-export default  Auth;
+export default Auth;

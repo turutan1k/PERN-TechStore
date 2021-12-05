@@ -1,32 +1,25 @@
-// import React from 'react';
-// import {Container} from "react-bootstrap";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-// import DeviceNameBar from '../components/DeviceNameBar';
-// import ManufacturerBar from '../components/ManufacturerBar';
-
-// const Shop = () => {
-//     return (
-//         <Container>
-//             <Row className="mt-2">
-//                 <Col md={3}>
-//                 <DeviceNameBar/>
-//                 </Col>
-//                 <Col md={9}>
-//                 <ManufacturerBar/>
-//                 </Col>
-//             </Row>
-//         </Container>
-//     );
-// };
-
-// export default Shop;
+import { Stack } from '@mui/material';
 import React from 'react';
-
+import DeviceList from '../components/DeviceList';
+import DeviceNameBar from '../components/DeviceNameBar';
+import ManufacturerBar from './../components/ManufacturerBar';
 const Shop = () => {
     return (
         <div>
-            SHOP
+            <Stack mt={5} ml={5}
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 4 }}>
+                <Stack md={3} mr={5}
+                direction="column">
+                    <DeviceNameBar/>
+                </Stack>
+                <Stack md={9}
+                spacing={2}
+                >
+                    <ManufacturerBar/>
+                    <DeviceList/>
+                </Stack>
+            </Stack>   
         </div>
     );
 };

@@ -12,7 +12,15 @@ export default class DeviceStore {
             {id:1, name:"Samsung"},
             {id:2, name:"Apple"},
             {id:3, name:"Lenovo"},
-            {id:4, name:"Samsung"},
+            {id:4, name:"Asus"},
+            {id:5, name:"Asus"},
+            {id:6, name:"Asus"},
+            {id:7, name:"Asus"},
+            {id:8, name:"Asus"},
+            {id:9, name:"Asus"},
+            {id:10, name:"Asus"},
+            {id:11, name:"Asus"},
+
         ]
         this._devices = [
             {id:1, model:"12 pro", releaseDate:"2021-03-05", guaranteePeriod:"12 месяцев", price:"3049", img:"https://shop.by/images/apple_iphone_12_pro_dual_sim_256gb_blue_1.jpg", deviceNameId:"2", manufacturerId:"2"},

@@ -12,8 +12,6 @@ const DeviceList = observer(() => {
             display: 'flex',
             flexDirection: 'row',
             flexWrap:"wrap",
-            justifyContent:"center",
-            alignContent: "space-between",
         }}>
 
             {device.devices.map(device =>

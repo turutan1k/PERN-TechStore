@@ -10,15 +10,11 @@ const ManufacturerBar = () => {
       root: {
           background: 'linear-gradient(45deg, #2196f3 30%, #2196f4 90%)',
           color: 'white',
-          height: 48,
-          padding: '0 30px',
         },
   });
   const subStyles = makeStyles({
       root: {
           color: 'white',
-          height: 48,
-          padding: '0 30px',
         },
   });
   const btns = btnStyles();
@@ -28,6 +24,7 @@ const ManufacturerBar = () => {
       <Stack 
             sx={{
                 flexWrap: 'wrap',
+
               }}
             className={subs.root}
             direction="row" 
@@ -35,11 +32,10 @@ const ManufacturerBar = () => {
         >
         {device.manufacturers.map(manufacturer =>
             <Chip 
-            sx={{ flexDirection: 'row'}} 
+            sx={{ m:2, flexWrap: 'wrap'}} 
             className={btns.root}
             label={manufacturer.name}
             button
-            variant="outlined"
             selected={manufacturer.id === device.setSelectedManufacturer}
             style={{cursor:'pointer'}}
             onClick = {() => device.setSelectedManufacturer(manufacturer)}

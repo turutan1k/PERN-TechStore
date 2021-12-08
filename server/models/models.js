@@ -44,7 +44,6 @@ const Provider = sequelize.define('provider',{
 const Manufacturer = sequelize.define('manufacturer',{
     id:{type: DataTypes.INTEGER, primaryKey:true, autoIncrement:true},
     name:{type: DataTypes.STRING, allowNull:false},
-    // countryID:{type: DataTypes.INTEGER, allowNull:false}//id-страны
 })
 //СТРАНА
 const Country = sequelize.define('country',{
@@ -61,7 +60,6 @@ const Bill = sequelize.define('bill',{
 })
 //ПРОДАЖА
 const Sale = sequelize.define('sale',{
-    deviceID:{type: DataTypes.INTEGER, allowNull:false},//id-техники
     number:{type: DataTypes.INTEGER, allowNull:false},
     price:{type: DataTypes.INTEGER, allowNull:false}
 })

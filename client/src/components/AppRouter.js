@@ -8,15 +8,15 @@ const AppRouter = () => {
     const {user} = useContext(Context)
     console.log(user)
     return (
-        <Switch>
+        <>
             {user.isAuth && authRoutes.map(({path, Component})=>
             <Route path={path} component={Component} exact key={Math.random()}/>
             )}
             {publicRoutes.map(({path, Component})=>
-            <Route path={path} component={Component} exact key={Math.random()}/>
+            <Route path={path} component={Component} key={Math.random()}/>
             )}
             <Redirect to={SHOP_ROUTE} exact/>
-        </Switch>
+        </>
     );
 };
 

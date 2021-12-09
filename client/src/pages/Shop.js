@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
 import React from 'react';
 import DeviceList from '../components/DeviceList';
-import DeviceNameBar from '../components/DeviceNameBar';
-import ManufacturerBar from './../components/ManufacturerBar';
+import ManufacturerBar from '../components/Bars/ManufacturerBar';
+import DeviceNameBar from './../components/Bars/DeviceNameBar';
 const Shop = () => {
     return (
         <div>

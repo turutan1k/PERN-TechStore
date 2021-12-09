@@ -1,9 +1,9 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Context } from './../index';
+import { Context } from '../../index';
 import {makeStyles} from '@mui/styles';
 import { Chip, Stack } from '@mui/material';
-
+import Manufacturer from '../Manufacturer';
 const ManufacturerBar = () => {
     const {device} = useContext(Context)
     const btnStyles = makeStyles({
@@ -24,24 +24,20 @@ const ManufacturerBar = () => {
       <Stack 
             sx={{
                 flexWrap: 'wrap',
-
               }}
             className={subs.root}
             direction="row" 
             component="nav"
         >
         {device.manufacturers.map(manufacturer =>
-            <Chip 
-            sx={{ m:2, flexWrap: 'wrap'}} 
-            className={btns.root}
-            label={manufacturer.name}
-            button
-            selected={manufacturer.id === device.setSelectedManufacturer}
-            style={{cursor:'pointer'}}
-            onClick = {() => device.setSelectedManufacturer(manufacturer)}
-            key = {device.id}
-            >
-            </Chip>
+            <Manufacturer
+              sx={{ m:2, flexWrap: 'wrap'}} 
+              key={manufacturer.id}
+              label={manufacturer.name}
+              className={btns.root}
+              device={manufacturer}
+              onClick={() => device.setSelectedManufacturer(manufacturer)}
+              isSelected={manufacturer.id === device.setSelectedManufacturer}/>
         )}
       </Stack>
     );

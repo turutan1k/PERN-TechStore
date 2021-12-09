@@ -1,10 +1,10 @@
 import React from 'react';
 import { List, ListItemText } from '@mui/material';
 import { ListSubheader, ListItem} from '@mui/material';
-import { Context } from './../index';
+import { Context } from '../../index';
 import { useContext } from 'react';
 import {makeStyles} from '@mui/styles';
-
+import DeviceName from '../DeviceName';
 const DeviceNameBar = () => {
     const {device} = useContext(Context)
     const btnStyles = makeStyles({
@@ -39,15 +39,13 @@ const DeviceNameBar = () => {
       }
     >
     {device.deviceNames.map(deviceName =>
-        <ListItem className={btns.root}
-        button
-        selected={deviceName.id === device.setSelectedDeviceName}
-        style={{cursor:'pointer'}}
-        onClick = {() => device.setSelectedDeviceName(deviceName)}
-        key = {device.id}
-        >
-        <ListItemText primary={deviceName.name} />
-        </ListItem>
+    <DeviceName
+      key={deviceName.id}
+      className={btns.root}
+      device={deviceName}
+      onClick={() => device.setSelectedDeviceName(deviceName)}
+      isSelected={deviceName.id === device.setSelectedDeviceName}/>
+   
     )}
     </List>
     );

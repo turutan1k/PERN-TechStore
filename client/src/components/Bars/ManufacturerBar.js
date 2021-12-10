@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Context } from '../../index';
 import {makeStyles} from '@mui/styles';
-import { Chip, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import Manufacturer from '../Manufacturer';
 const ManufacturerBar = () => {
     const {device} = useContext(Context)

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ListItem } from '@material-ui/core';
-import { ListItemText } from '@material-ui/core';
+import { ListItem } from '@mui/material';
+import { ListItemText } from '@mui/material';
 
 const DeviceName = (props) => {
         const {device, onClick, className, isSelected} = props;

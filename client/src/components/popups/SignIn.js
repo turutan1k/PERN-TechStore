@@ -1,20 +1,20 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import { Dialog } from "@material-ui/core";
-import { DialogContent } from "@material-ui/core";
-import { DialogTitle } from "@material-ui/core";
+import { Button } from '@mui/material'
+import { Dialog } from "@mui/material";
+import { DialogContent } from "@mui/material";
+import { DialogTitle } from "@mui/material";
 import { DialogContentText } from '@mui/material';
-import { TextField } from "@material-ui/core/";
+import { TextField } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { REGISTRATION_ROUTE } from './../utils/consts';
+import { REGISTRATION_ROUTE } from '../../utils/consts';
 
 const SignIn = ({ isOpened }) => {
   const history = useHistory();
 
   return (
-    <Dialog open onClose={history.goBack} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">Авторизация</DialogTitle>
+    <Dialog open onClose={history.goBack}>
+      <DialogTitle>Авторизация</DialogTitle>
       <DialogContent>
           <DialogContentText>Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Регистрация</NavLink></DialogContentText>
           <TextField 
@@ -40,7 +40,7 @@ const SignIn = ({ isOpened }) => {
             Войти
           </Button>
           <Button
-            color="primary"
+            color="error"
             onClick={history.goBack}
           >
             Отмена

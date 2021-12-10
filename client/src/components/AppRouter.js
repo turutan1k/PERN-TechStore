@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { Context } from '../index';
 import {authRoutes, publicRoutes} from "../routes";
 import {SHOP_ROUTE} from "../utils/consts"
@@ -10,10 +10,10 @@ const AppRouter = () => {
     return (
         <>
             {user.isAuth && authRoutes.map(({path, Component})=>
-            <Route path={path} component={Component} exact key={Math.random()}/>
+            <Route path={path} component={Component} />
             )}
             {publicRoutes.map(({path, Component})=>
-            <Route path={path} component={Component} key={Math.random()}/>
+            <Route path={path} component={Component} />
             )}
             <Redirect to={SHOP_ROUTE} exact/>
         </>

@@ -53,7 +53,7 @@ const DevicePage = () => {
                 </Grid>
             </Grid>
           </Box>
-          <Box 
+          <Box container
           sx={{
             display:'flex',
             flexDirection:'row',

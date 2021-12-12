@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import { Dialog } from "@mui/material";
 import { DialogContent } from "@mui/material";
 import { DialogTitle } from "@mui/material";
@@ -33,6 +33,10 @@ const SignIn = ({ isOpened }) => {
             type="password"
             fullWidth
           />
+          <Grid sx={{
+            display:'flex',
+            justifyContent:'flex-end',
+          }}>
           <Button
             color="primary"
             onClick={history.goBack}
@@ -45,6 +49,8 @@ const SignIn = ({ isOpened }) => {
           >
             Отмена
           </Button>
+          </Grid>
+          
         </DialogContent>
       </Dialog>
   );

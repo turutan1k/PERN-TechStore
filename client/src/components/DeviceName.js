@@ -7,8 +7,9 @@ const DeviceName = (props) => {
         const {name} = device;
         return (
             <div>
-              <ListItem className={className}
+              <ListItem 
               button
+              className={className}
               selected={isSelected}
               style={{cursor:'pointer'}}
               onClick={onClick}

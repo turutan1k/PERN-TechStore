@@ -6,7 +6,18 @@ export default class DeviceStore {
             {id:1, name:'Холодильники'},
             {id:2, name:'Смартфоны'},
             {id:3, name:'Ноутбуки'},
-            {id:4, name:'Телевизоры'}
+            {id:4, name:'Телевизоры'},
+            {id:5, name:'Телевизоры'},
+            {id:6, name:'Телевизоры'},
+            {id:7, name:'Телевизоры'},
+            {id:8, name:'Телевизоры'},
+            {id:9, name:'Телевизоры'},
+            {id:10, name:'Телевизоры'},
+            {id:11, name:'Телевизоры'},
+            {id:12, name:'Телевизоры'},
+            {id:13, name:'Телевизоры'},
+            {id:14, name:'Телевизоры'}
+
         ]
         this._manufacturers = [
             {id:1, name:"Samsung"},
@@ -19,7 +30,17 @@ export default class DeviceStore {
             {id:8, name:"Asus"},
             {id:9, name:"Asus"},
             {id:10, name:"Asus"},
-            {id:11, name:"Asus"},
+            {id:12, name:"Asus"},
+            {id:13, name:"Asus"},
+            {id:14, name:"Asus"},
+            {id:15, name:"Asus"},
+            {id:16, name:"Asus"},
+            {id:17, name:"Asus"},
+            {id:18, name:"Asus"},
+            {id:19, name:"Asus"},
+            {id:20, name:"Asus"},
+            {id:21, name:"Asus"},
+            {id:22, name:"Asus"},
 
         ]
         this._devices = [

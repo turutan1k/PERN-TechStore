@@ -8,7 +8,7 @@ const DeviceList = observer(() => {
     const {device} = useContext (Context)
 
     return (
-        <Stack sx={{
+        <Stack  sx={{
             display: 'flex',
             flexDirection: 'row',
             flexWrap:"wrap",

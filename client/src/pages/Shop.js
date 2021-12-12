@@ -14,15 +14,13 @@ const Shop = () => {
             >
                 <Grid 
                 item 
-                direction="row"
-                xs={3} 
+                xs={2} 
                 >
                     <DeviceNameBar/>
                 </Grid>
                 <Grid
                 item 
-                direction="row"
-                xs={9} 
+                xs={10} 
                 >
                     <ManufacturerBar/>
                     <DeviceList/>

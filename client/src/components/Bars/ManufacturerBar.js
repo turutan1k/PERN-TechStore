@@ -21,7 +21,7 @@ const ManufacturerBar = () => {
   const subs = subStyles();
 
     return (
-      <Stack 
+      <Stack
             sx={{
                 flexWrap: 'wrap',
               }}

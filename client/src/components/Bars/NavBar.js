@@ -15,8 +15,6 @@ import { useContext } from 'react';
 import { Context } from './../../index';
 
 import { SHOP_ROUTE } from '../../utils/consts';
-import { LOGIN_ROUTE } from '../../utils/consts';
-import { REGISTRATION_ROUTE } from '../../utils/consts';
 import { ADMIN_ROUTE } from './../../utils/consts';
 
 const NavBar = observer(() => {
@@ -41,10 +39,11 @@ const NavBar = observer(() => {
           <NavLink style={{color:'white', textDecoration:'none'}} to={SHOP_ROUTE}>TechStore</NavLink>
           </Typography>
           {user.isAuth ? 
-          < >
-            <Button variant="outline-light" onClick={() => history.push(LOGIN_ROUTE)}>Sign In</Button>
-            <Button variant="outline-light" onClick={() => history.push(REGISTRATION_ROUTE)}>Sign Up</Button>
-            <Button variant="outline-light" onClick={() => history.push(ADMIN_ROUTE)}>Admin</Button>
+          <>
+            <Button variant="outline-light" onClick={() => history.push(ADMIN_ROUTE)}>Админ панель</Button>
+            <Button variant="outline-light">Выйти</Button>
+            {/* <Button variant="outline-light" onClick={() => history.push(LOGIN_ROUTE)}>Sign In</Button>
+            <Button variant="outline-light" onClick={() => history.push(REGISTRATION_ROUTE)}>Sign Up</Button> */}
 
           </>
             :

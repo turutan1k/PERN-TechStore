@@ -5,21 +5,81 @@ import  ExpandMoreIcon  from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import { AccordionDetails } from '@mui/material';
 import { Context } from './../../index';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useState } from 'react';
-
-const DeviceAccord = () => {
+import { fetchDeviceNames, fetchManufacturers } from '../../http/deviceAPI';
+import { observer } from 'mobx-react-lite';
+import { createDevice } from './../../http/deviceAPI';
+const DeviceAccord = observer( () => {
   const {device} = useContext(Context)
 
+  const [deviceName, setDeviceName] = useState('')
+  const [manufacturer, setManufacturer] = useState('')
+  const [model, setModel] = useState('')
+  const [releaseDate, setReleaseDate] = useState('')
+  const [guaranteePeriod, setGuaranteePeriod] = useState('')
+  const [price, setPrice] = useState(0)
+  const [file, setFile] = useState(null)
+
   const [info, setInfo] = useState([])
+
+  useEffect( () => {
+    fetchDeviceNames().then(data => device.setDeviceNames(data))
+    fetchManufacturers().then(data => device.setManufacturers(data))
+},[])
 
   const addInfo = () => {
     setInfo([...info, {title:'', description:'', number:Date.now()}])
   }
 
+  const changeInfo = (key, value, number) => {
+    setInfo(info.map(i => i.number === number ? {...i, [key]: value} : 1))
+  }
+
   const removeInfo = (number) => {
     setInfo([info.filter(i => i.number !== number)])
   }
+
+  const addDevice = () => { 
+    const formData = new FormData()
+    formData.append('model', model)
+    formData.append('releaseDate', releaseDate)
+    formData.append('guaranteePeriod', guaranteePeriod)
+    formData.append('price', `${price}`)
+    formData.append('img', file)
+    formData.append('deviceNameId', device.selectedDeviceName.id)
+    formData.append('manufacturerId', device.selectedManufacturer.id)
+    formData.append('info', JSON.stringify(info))
+    createDevice(formData)
+  }
+
+  const deviceNameChange = (event) => {
+    setDeviceName(event.target.value)
+  }
+
+  const manufacturerChange = (event) => {
+    setManufacturer(event.target.value)
+  }
+
+  const modelChange = (event) => {
+    setModel(event.target.value)
+  }
+
+  const releaseDateChange = (event) => {
+    setReleaseDate(event.target.value)
+  }
+
+  const guaranteePeriodChange = (event) => {
+    setGuaranteePeriod(event.target.value)
+  }
+
+  const priceChange = (event) => {
+    setPrice(Number(event.target.value))
+  }
+
+  const selectFile = e => {
+    setFile(e.target.files[0])
+}
 
     return (
       <div>
@@ -40,54 +100,57 @@ const DeviceAccord = () => {
                   padding:1,
               }}>
                     <TextField 
+                            onChange={deviceNameChange}
                             color="primary"
                             select
                             autoFocus
                             margin="dense"
                             id="outlined-basic"
                             label="Тип"
-                            type="model"
+                            type="text"
                             fullWidth
                         >
-                          {device.deviceNames.map(deviceName => (
-                          <MenuItem key={deviceName.id} value={deviceName.name}>
-                            {deviceName.name}
+                          {device.deviceNames.map((deviceName) => (
+                          <MenuItem 
+                          key={deviceName.id} value={deviceName.name}
+                          >
+                          {deviceName.name}
                           </MenuItem>
-                        ))}
+                          ))}
                         </TextField>
                         <TextField 
-                      color="primary"
-                      select
-                      autoFocus
-                      margin="dense"
-                      id="outlined-basic"
-                      label="Бренд"
-                      type="model"
-                      fullWidth
-                  >
-                     {device.manufacturers.map(manufacturer => (
-                    <MenuItem key={manufacturer.id} value={manufacturer.name}>
+                            onChange={manufacturerChange}
+                            color="primary"
+                            select
+                            autoFocus
+                            margin="dense"
+                            id="outlined-basic"
+                            label="Брэнд"
+                            type="text"
+                            fullWidth
+                        >
+                     {device.manufacturers.map((manufacturer) => (
+                    <MenuItem 
+                    key={manufacturer.id} value={manufacturer.name}
+                    >
                       {manufacturer.name}
                     </MenuItem>
                   ))}
                   </TextField>
-                   <TextField 
+                   <TextField
+                      value={model}
+                      onChange={modelChange}
                       color="primary"
-                      select
                       autoFocus
                       margin="dense"
                       id="outlined-basic"
                       label="Модель"
-                      type="model"
+                      type="text"
                       fullWidth
-                  >
-                     {device.devices.map(device => (
-                    <MenuItem key={device.id} value={device.model}>
-                      {device.model}
-                    </MenuItem>
-                  ))}
-                  </TextField>
+                  />
                   <TextField 
+                      value={releaseDate}
+                      onChange={releaseDateChange}
                       color="primary"
                       autoFocus
                       margin="dense"
@@ -98,8 +161,10 @@ const DeviceAccord = () => {
                       }}
                       type="date"
                       fullWidth
-                  />
+                      />
                   <TextField 
+                      value={guaranteePeriod}
+                      onChange={guaranteePeriodChange}
                       color="primary"
                       autoFocus
                       margin="dense"
@@ -109,20 +174,23 @@ const DeviceAccord = () => {
                       fullWidth
                   />
                   <TextField 
+                      value={price}
+                      onChange={priceChange}
                       color="primary"
-                      autoFocus
                       margin="dense"
                       id="outlined-basic"
                       label="Цена"
                       type="number"
+                      name="numberformat"
                       inputProps={{min:0}}
                       fullWidth
                   />
                   <TextField 
+                      onChange={selectFile}
                       color="primary"
                       autoFocus
                       margin="dense"
-                      id="outlined-basic"
+                      id="formatted-numberformat-input"
                       label="Фотография"
                       type="file"
                       InputLabelProps={{
@@ -147,6 +215,8 @@ const DeviceAccord = () => {
            }}>
               <Grid item sx={{margin:1}} >
               <TextField 
+                      value={i.title}
+                      onChange={(e) => changeInfo('title', e.target.value, i.number)}
                       color="primary"
                       autoFocus
                       margin="dense"
@@ -158,6 +228,8 @@ const DeviceAccord = () => {
               </Grid>
               <Grid item sx={{margin:1}}>
               <TextField 
+                      value={i.description}
+                      onChange={(e) =>  changeInfo('description', e.target.value, i.number)}
                       color="primary"
                       autoFocus
                       margin="dense"
@@ -181,6 +253,7 @@ const DeviceAccord = () => {
           Добавить новое свойство
         </Button>
           <Button
+          onClick={addDevice}
           color="primary"
         >
           Добавить устройство
@@ -190,6 +263,6 @@ const DeviceAccord = () => {
       </Accordion>
       </div>
     );
-};
+});
 
 export default DeviceAccord;

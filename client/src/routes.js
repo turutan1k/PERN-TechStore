@@ -1,9 +1,8 @@
 import Shop from './pages/Shop';
-import DevicePage from './components/popups/DevicePage';
+import DevicePage from './components/DevicePage';
 import {ADMIN_ROUTE, SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, DEVICE_ROUTE} from './utils/consts';
-import SignUp from './components/popups/SignUp';
-import SignIn from './components/popups/SignIn';
 import Admin from './pages/Admin';
+import Auth from './components/popups/Auth';
 
 export const authRoutes = [
     {
@@ -20,11 +19,11 @@ export const publicRoutes =[
     },    
     {
         path: LOGIN_ROUTE,
-        Component: SignIn
+        Component: Auth
     },
     {
         path: REGISTRATION_ROUTE,
-        Component: SignUp
+        Component: Auth
     },    
     {
         path: DEVICE_ROUTE + '/:id',

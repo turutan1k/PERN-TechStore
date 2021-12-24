@@ -5,8 +5,21 @@ import { AccordionSummary } from '@mui/material';
 import  ExpandMoreIcon  from '@mui/icons-material/ExpandMore';
 import { Typography } from '@mui/material';
 import { AccordionDetails } from '@mui/material';
+import { useState } from 'react';
+import { createDeviceName } from '../../http/deviceAPI';
 
 const DeviceNameAccord = () => {
+
+    const [value, setValue] = useState('')
+
+    const addDeviceName = () => {
+        createDeviceName({name: value}).then(data => {
+        setValue('')
+        })
+    }
+
+
+
     return (
         <div>
         <Accordion sx={{ marginTop:3 }}>
@@ -24,13 +37,15 @@ const DeviceNameAccord = () => {
                     padding:1,
                 }}>
                     <TextField 
-                        color="primary"
-                      autoFocus
-                      margin="dense"
-                      id="outlined-basic"
-                      label="Название типа"
-                      type="name"
-                      fullWidth
+                    value={value}
+                    onChange={e => setValue(e.target.value)}
+                    color="primary"
+                    autoFocus
+                    margin="dense"
+                    id="outlined-basic"
+                    label="Название типа"
+                    type="name"
+                    fullWidth
                     />
                 </Grid>
             <Grid container sx={{
@@ -38,6 +53,7 @@ const DeviceNameAccord = () => {
             }}>
             <Button
             color="primary"
+            onClick={addDeviceName}
           >
             Добавить
           </Button>

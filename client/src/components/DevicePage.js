@@ -1,4 +1,4 @@
-import { Grid, Box, Button } from '@mui/material';
+import { Grid, Box, Button, ImageListItem } from '@mui/material';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -7,12 +7,20 @@ import { DialogContent } from "@mui/material";
 import { DialogTitle } from "@mui/material";
 import { DialogContentText } from '@mui/material';
 import { Paper } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { fetchOneDevice } from '../http/deviceAPI';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
 
 const DevicePage = () => {
-    const device = {id:1, model:"12 pro", releaseDate:"2021-03-05", guaranteePeriod:"12 месяцев", price:"3049", img:"https://shop.by/images/apple_iphone_12_pro_dual_sim_256gb_blue_1.jpg", deviceNameId:"2", manufacturerId:"2"}
-    const consignment = {id:1, consignmentDate:"2021-03-05"}
-    const provider = {id:1, name:"АСБИС"}
-    const country = {id:1, name:"Япония",code:"JPN"}
+    const [device, setDevice] = useState({info:[]})
+    const {id} = useParams()
+
+    useEffect(() => {
+        fetchOneDevice(id).then(data => setDevice(data))
+        // eslint-disable-next-line
+    },[])
 
     const history = useHistory();
     
@@ -25,7 +33,7 @@ const DevicePage = () => {
                 <Grid item xs={3} spacing={1}>
                     <Paper 
                     variant="outlined"
-                    alt="device.img"
+                    alt="device.info"
                     sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -33,7 +41,19 @@ const DevicePage = () => {
                     flexShrink:'1',
                     flexBasics:'100%',
                     }}>
-                    <img src={device.img} alt='device.img'/>
+                      <ImageListItem key={device.img}>
+                        <img
+                          sx={{
+                          maxWidth:'100%', 
+                          height:400, 
+                          objectFit:'cover', 
+                          alignItems:'center', 
+                          justifyContent:'center', 
+                          objectPosition:'center', 
+                          padding:'2'
+                          }} 
+                        src={process.env.REACT_APP_API_URL + device.img} alt='device.img'/>
+                      </ImageListItem>
                     </Paper>
                 </Grid>
                 <Grid item xs={9} 
@@ -43,12 +63,15 @@ const DevicePage = () => {
                   alignItems: 'flex-start',
                   justifyContent:'center',
                 }}>
-                    <DialogContentText>{"Модель: " + device.model}</DialogContentText>
-                    <DialogContentText>{"Дата релиза: " + device.releaseDate}</DialogContentText>
-                    <DialogContentText>{"Гарантия: " + device.guaranteePeriod}</DialogContentText>
-                    <DialogContentText>{"Партия от: " + consignment.consignmentDate}</DialogContentText>
+                      <DialogContentText>{"Название техники: " + device.deviceNameId}</DialogContentText>
+                      <DialogContentText>{"Производитель: " + device.manufacturerId}</DialogContentText>
+                      <DialogContentText>{"Модель: " + device.model}</DialogContentText>
+                      <DialogContentText>{"Дата релиза: " + device.releaseDate}</DialogContentText>
+                      <DialogContentText>{"Гарантия: " + device.guaranteePeriod}</DialogContentText>
+
+                    {/* <DialogContentText>{"Партия от: " + consignment.consignmentDate}</DialogContentText>
                     <DialogContentText>{"Поставщик: " + provider.name}</DialogContentText>
-                    <DialogContentText>{"Страна производитель: " + country.name + " (" +  country.code +") "}</DialogContentText>
+                    <DialogContentText>{"Страна производитель: " + country.name + " (" +  country.code +") "}</DialogContentText> */}
 
                 </Grid>
             </Grid>

@@ -14,13 +14,19 @@ import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from './../../index';
 
-import { SHOP_ROUTE } from '../../utils/consts';
+import { LOGIN_ROUTE, SHOP_ROUTE } from '../../utils/consts';
 import { ADMIN_ROUTE } from './../../utils/consts';
 
 const NavBar = observer(() => {
 
     const {user} = useContext(Context)  
     const history = useHistory()
+
+    const logOut = () => {
+      user.setUser({})
+      user.setIsAuth(false)
+      localStorage.removeItem('token')
+    }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -41,13 +47,10 @@ const NavBar = observer(() => {
           {user.isAuth ? 
           <>
             <Button variant="outline-light" onClick={() => history.push(ADMIN_ROUTE)}>Админ панель</Button>
-            <Button variant="outline-light">Выйти</Button>
-            {/* <Button variant="outline-light" onClick={() => history.push(LOGIN_ROUTE)}>Sign In</Button>
-            <Button variant="outline-light" onClick={() => history.push(REGISTRATION_ROUTE)}>Sign Up</Button> */}
-
+            <Button variant="outline-light"onClick={() => logOut()}>Выйти</Button>
           </>
             :
-            <Button variant={"outline-light"} onClick={() => user.setIsAuth(true)}>Авторизация</Button>
+            <Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
           }
         </Toolbar>
       </AppBar>

@@ -7,11 +7,31 @@ import { DialogTitle } from "@mui/material";
 import { DialogContentText } from '@mui/material';
 import { TextField } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { REGISTRATION_ROUTE } from '../../utils/consts';
+import { REGISTRATION_ROUTE, SHOP_ROUTE } from '../../utils/consts';
+import { login } from "../../http/userAPI";
+import { useState } from "react";
+import { observer } from 'mobx-react-lite';
+import { useContext } from "react";
+import { Context } from "../../index"
 
-const SignIn = ({ isOpened }) => {
+const SignIn = observer(() => {
+  const {user} = useContext(Context)
   const history = useHistory();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
+  const click = async (data) =>{
+      try{
+        data = await login(email, password)
+        user.setUser(user)
+        user.setIsAuth(true)
+        history.push(SHOP_ROUTE)
+      } catch(e){
+        alert(e.response.data.message)
+      }
+      
+      
+  }
   return (
     <Dialog open onClose={history.goBack}>
       <DialogTitle>Авторизация</DialogTitle>
@@ -24,6 +44,8 @@ const SignIn = ({ isOpened }) => {
             label="Email Adress"
             type="email"
             fullWidth
+            value={email}
+            onChange={e =>setEmail(e.target.value)}
           />
           <TextField 
             autoFocus
@@ -32,6 +54,8 @@ const SignIn = ({ isOpened }) => {
             label="Password"
             type="password"
             fullWidth
+            value={password}
+            onChange={e =>setPassword(e.target.value)}
           />
           <Grid sx={{
             display:'flex',
@@ -39,7 +63,7 @@ const SignIn = ({ isOpened }) => {
           }}>
           <Button
             color="primary"
-            onClick={history.goBack}
+            onClick={click}
           >
             Войти
           </Button>
@@ -54,6 +78,6 @@ const SignIn = ({ isOpened }) => {
         </DialogContent>
       </Dialog>
   );
-};
+});
 
 export default SignIn;

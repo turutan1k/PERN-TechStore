@@ -5,6 +5,7 @@ import { Context } from '../../index';
 import { useContext } from 'react';
 import {makeStyles} from '@mui/styles';
 import DeviceName from '../DeviceName';
+
 const DeviceNameBar = () => {
     const {device} = useContext(Context)
     const btnStyles = makeStyles({
